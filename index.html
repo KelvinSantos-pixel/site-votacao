@@ -6,342 +6,185 @@
 <title>Votação — Jorge Messias como ministro?</title>
 <style>
   :root {
-    --bg: #070b17;
-    --bg-2: #0d1428;
-    --card: rgba(255, 255, 255, 0.055);
-    --card-solid: #121a30;
-    --line: rgba(255, 255, 255, 0.1);
-    --text: #eef2ff;
-    --muted: #94a2c4;
-    --favor: #22c55e;
-    --favor-soft: rgba(34, 197, 94, 0.16);
-    --contra: #f05252;
-    --contra-soft: rgba(240, 82, 82, 0.16);
-    --accent: #7c8cff;
-    --shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+    --bg: #070b17; --bg-2: #0d1428;
+    --card: rgba(255,255,255,.055); --card-solid: #121a30;
+    --line: rgba(255,255,255,.1); --text: #eef2ff; --muted: #94a2c4;
+    --favor: #22c55e; --favor-soft: rgba(34,197,94,.16);
+    --contra: #f05252; --contra-soft: rgba(240,82,82,.16);
+    --accent: #7c8cff; --shadow: 0 24px 60px rgba(0,0,0,.45);
   }
-
   * { box-sizing: border-box; }
   html, body { height: 100%; }
-
   body {
-    margin: 0;
+    margin: 0; color: var(--text); min-height: 100vh; overflow-x: hidden;
     font-family: "Segoe UI Variable Display", "Segoe UI", system-ui, -apple-system, Inter, Roboto, sans-serif;
-    color: var(--text);
     background:
-      radial-gradient(1100px 600px at 12% -10%, rgba(124, 140, 255, 0.22), transparent 60%),
-      radial-gradient(900px 520px at 92% 0%, rgba(34, 197, 94, 0.12), transparent 55%),
-      radial-gradient(800px 600px at 60% 110%, rgba(240, 82, 82, 0.12), transparent 60%),
+      radial-gradient(1100px 600px at 12% -10%, rgba(124,140,255,.22), transparent 60%),
+      radial-gradient(900px 520px at 92% 0%, rgba(34,197,94,.12), transparent 55%),
+      radial-gradient(800px 600px at 60% 110%, rgba(240,82,82,.12), transparent 60%),
       linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
-    background-attachment: fixed;
-    -webkit-font-smoothing: antialiased;
-    min-height: 100vh;
-    overflow-x: hidden;
+    background-attachment: fixed; -webkit-font-smoothing: antialiased;
   }
+  .wrap { width: 100%; max-width: 1180px; margin: 0 auto; padding: 1.6rem 1.25rem 2rem; display: flex; flex-direction: column; min-height: 100vh; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.6rem; flex-wrap: wrap; }
+  .brand { display: inline-flex; align-items: center; gap: .6rem; font-weight: 650; font-size: .95rem; letter-spacing: .02em; }
+  .brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--favor); box-shadow: 0 0 0 5px rgba(34,197,94,.18); }
+  .brand .dot.off { background: #f59e0b; box-shadow: 0 0 0 5px rgba(245,158,11,.18); }
+  .nav { display: flex; gap: .4rem; flex-wrap: wrap; }
+  .nav button { appearance: none; border: 1px solid transparent; background: none; color: var(--muted); font: inherit; font-size: .85rem; padding: .45rem .8rem; border-radius: 999px; cursor: pointer; transition: .18s ease; }
+  .nav button:hover { color: var(--text); background: rgba(255,255,255,.05); }
+  .nav button.active { color: var(--text); border-color: var(--line); background: rgba(255,255,255,.06); }
+  h1 { font-size: clamp(1.8rem, 4.2vw, 3rem); line-height: 1.05; letter-spacing: -.03em; margin: 0 0 .8rem; font-weight: 720; overflow-wrap: anywhere; }
+  .lead { color: var(--muted); font-size: clamp(1rem, 1.5vw, 1.1rem); margin: 0 0 1.8rem; max-width: 52ch; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 26px; padding: 1.6rem; box-shadow: var(--shadow); }
 
-  .wrap {
-    width: 100%;
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 1.6rem 1.25rem 2rem;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-
-  .topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 1.6rem;
-    flex-wrap: wrap;
-  }
-
-  .brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-weight: 650;
-    font-size: 0.95rem;
-    letter-spacing: 0.02em;
-  }
-
-  .brand .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--favor);
-    box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.18);
-  }
-
-  .nav { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-
-  .nav button {
-    appearance: none;
-    border: 1px solid transparent;
-    background: none;
-    color: var(--muted);
-    font: inherit;
-    font-size: 0.85rem;
-    padding: 0.45rem 0.8rem;
-    border-radius: 999px;
-    cursor: pointer;
-    transition: 0.18s ease;
-  }
-
-  .nav button:hover { color: var(--text); background: rgba(255, 255, 255, 0.05); }
-  .nav button.active { color: var(--text); border-color: var(--line); background: rgba(255, 255, 255, 0.06); }
-
-  h1 {
-    font-size: clamp(1.8rem, 4.2vw, 3rem);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    margin: 0 0 0.8rem;
-    font-weight: 720;
-    overflow-wrap: anywhere;
-  }
-
-  .lead { color: var(--muted); font-size: clamp(1rem, 1.5vw, 1.1rem); margin: 0 0 1.8rem; max-width: 48ch; }
-
-  .card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 26px;
-    padding: 1.6rem;
-    box-shadow: var(--shadow);
-  }
-
-  /* ---------------------------------------------------------- votação */
-
-  .vote-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; margin: 0.2rem 0 1.2rem; }
-
-  .vote-btn {
-    appearance: none;
-    border: 1px solid var(--line);
-    border-radius: 24px;
-    padding: clamp(1.6rem, 4vw, 2.8rem) 1rem;
-    font: inherit;
-    color: var(--text);
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.9rem;
-    background: linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
-    transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.2s ease;
-    min-height: 220px;
-    text-align: center;
-  }
-
+  .vote-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; margin: .2rem 0 1.2rem; }
+  .vote-btn { appearance: none; border: 1px solid var(--line); border-radius: 24px; padding: clamp(1.6rem, 4vw, 2.8rem) 1rem; font: inherit; color: var(--text); cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .9rem; background: linear-gradient(160deg, rgba(255,255,255,.07), rgba(255,255,255,.02)); transition: transform .16s ease, border-color .16s ease, box-shadow .2s ease; min-height: 220px; text-align: center; }
   .vote-btn:hover { transform: translateY(-3px); }
-  .vote-btn:active { transform: scale(0.99); }
-  .vote-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-
-  .vote-btn .icon {
-    width: clamp(54px, 8vw, 74px);
-    height: clamp(54px, 8vw, 74px);
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    font-weight: 700;
-  }
-
+  .vote-btn:active { transform: scale(.99); }
+  .vote-btn:disabled { opacity: .5; cursor: wait; transform: none; }
+  .vote-btn .icon { width: clamp(54px, 8vw, 74px); height: clamp(54px, 8vw, 74px); border-radius: 50%; display: grid; place-items: center; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; }
   .vote-btn .label { font-size: clamp(1.35rem, 3.4vw, 2rem); font-weight: 700; }
-  .vote-btn .hint { color: var(--muted); font-size: 0.88rem; }
-
-  .vote-btn.favor:hover { border-color: rgba(34, 197, 94, 0.6); box-shadow: 0 18px 50px rgba(34, 197, 94, 0.22); }
+  .vote-btn .hint { color: var(--muted); font-size: .88rem; }
+  .vote-btn.favor:hover { border-color: rgba(34,197,94,.6); box-shadow: 0 18px 50px rgba(34,197,94,.22); }
   .vote-btn.favor .icon { background: var(--favor-soft); color: var(--favor); }
-  .vote-btn.contra:hover { border-color: rgba(240, 82, 82, 0.6); box-shadow: 0 18px 50px rgba(240, 82, 82, 0.22); }
+  .vote-btn.contra:hover { border-color: rgba(240,82,82,.6); box-shadow: 0 18px 50px rgba(240,82,82,.22); }
   .vote-btn.contra .icon { background: var(--contra-soft); color: var(--contra); }
 
-  /* ---------------------------------------------------------- telão */
-
-  .screen-main { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: clamp(0.9rem, 2.6vh, 1.8rem); }
-
-  .screen-title { font-size: clamp(1.4rem, 3vw, 2.6rem); font-weight: 660; letter-spacing: -0.025em; margin: 0; }
-
+  .screen-main { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: clamp(.9rem, 2.6vh, 1.8rem); }
+  .screen-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; }
+  .screen-title { font-size: clamp(1.4rem, 3vw, 2.6rem); font-weight: 660; letter-spacing: -.025em; margin: 0; }
+  .qr-box { text-align: center; flex: 0 0 auto; }
+  .qr-box #qr { background: #fff; padding: 8px; border-radius: 12px; display: inline-block; line-height: 0; }
+  .qr-box #qr:empty { display: none; }
+  .qr-box #qr img, .qr-box #qr canvas { width: clamp(96px, 11vw, 150px) !important; height: auto !important; }
+  .qr-box small { display: block; color: var(--muted); margin-top: .4rem; font-size: .78rem; }
   .duel { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: clamp(1rem, 3vw, 3rem); }
-
-  .pct { font-variant-numeric: tabular-nums; font-size: clamp(2.8rem, 9vw, 7rem); font-weight: 780; line-height: 0.92; letter-spacing: -0.045em; }
+  .pct { font-variant-numeric: tabular-nums; font-size: clamp(2.8rem, 9vw, 7rem); font-weight: 780; line-height: .92; letter-spacing: -.045em; }
   .side.favor .pct { color: var(--favor); }
   .side.contra .pct { color: var(--contra); }
   .side.contra { text-align: right; }
-
-  .side-label { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.35rem; font-weight: 620; font-size: clamp(0.95rem, 1.6vw, 1.35rem); }
+  .side-label { display: flex; align-items: center; gap: .5rem; margin-top: .35rem; font-weight: 620; font-size: clamp(.95rem, 1.6vw, 1.35rem); }
   .side.contra .side-label { justify-content: flex-end; }
-  .side-count { color: var(--muted); font-size: clamp(0.8rem, 1.1vw, 1rem); margin-top: 0.15rem; }
-
+  .side-count { color: var(--muted); font-size: clamp(.9rem, 1.3vw, 1.15rem); margin-top: .15rem; font-variant-numeric: tabular-nums; }
   .chip { width: 12px; height: 12px; border-radius: 4px; display: inline-block; }
-
   .mid { text-align: center; color: var(--muted); }
   .mid-total { font-variant-numeric: tabular-nums; font-size: clamp(1.8rem, 4.2vw, 3.4rem); font-weight: 750; color: var(--text); line-height: 1; }
-  .mid-label { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.25rem; }
+  .mid-label { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; margin-top: .25rem; }
+  .split { display: flex; height: clamp(24px, 5vh, 54px); border-radius: 999px; overflow: hidden; background: rgba(255,255,255,.07); }
+  .split-favor { background: linear-gradient(90deg, #16a34a, #4ade80); width: 0%; transition: width .7s cubic-bezier(.22,1,.36,1); }
+  .split-contra { background: linear-gradient(90deg, #f87171, #dc2626); width: 0%; transition: width .7s cubic-bezier(.22,1,.36,1); }
+  .lead-line { margin: 0; text-align: center; color: var(--muted); font-size: clamp(.9rem, 1.3vw, 1.1rem); }
 
-  .split { display: flex; height: clamp(24px, 5vh, 54px); border-radius: 999px; overflow: hidden; background: rgba(255, 255, 255, 0.07); }
-  .split-favor { background: linear-gradient(90deg, #16a34a, #4ade80); width: 0%; transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
-  .split-contra { background: linear-gradient(90deg, #f87171, #dc2626); width: 0%; transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
-
-  .lead-line { margin: 0; text-align: center; color: var(--muted); font-size: clamp(0.9rem, 1.3vw, 1.1rem); }
-
-  /* ---------------------------------------------------------- botões e campos */
-
-  .actions { display: flex; flex-wrap: wrap; gap: 0.7rem; }
-
-  .btn {
-    appearance: none;
-    border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--text);
-    border-radius: 14px;
-    padding: 0.8rem 1.1rem;
-    font: inherit;
-    font-weight: 600;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: 0.18s ease;
-  }
-
-  .btn:hover { background: rgba(255, 255, 255, 0.12); transform: translateY(-1px); }
+  .actions { display: flex; flex-wrap: wrap; gap: .7rem; }
+  .btn { appearance: none; border: 1px solid var(--line); background: rgba(255,255,255,.06); color: var(--text); border-radius: 14px; padding: .8rem 1.1rem; font: inherit; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: .5rem; transition: .18s ease; }
+  .btn:hover { background: rgba(255,255,255,.12); transform: translateY(-1px); }
   .btn.primary { background: linear-gradient(180deg, #22c55e, #16a34a); border-color: transparent; color: #04240f; }
-  .btn.danger { color: #ffb4b4; border-color: rgba(240, 82, 82, 0.4); }
-  .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
+  .btn.danger { color: #ffb4b4; border-color: rgba(240,82,82,.4); }
+  .btn.danger.armed { background: #dc2626; color: #fff; }
+  .btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
   .muted { color: var(--muted); }
-  .small { font-size: 0.85rem; }
-
-  .field { display: grid; gap: 0.45rem; margin-bottom: 1rem; max-width: 280px; }
-  .field label { font-size: 0.86rem; color: var(--muted); }
-
-  input[type="password"] {
-    font: inherit;
-    color: var(--text);
-    background: rgba(0, 0, 0, 0.35);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 0.75rem 0.9rem;
-    width: 100%;
-  }
-
+  .small { font-size: .85rem; }
+  .field { display: grid; gap: .45rem; margin-bottom: 1rem; max-width: 280px; }
+  .field label { font-size: .86rem; color: var(--muted); }
+  input[type="password"] { font: inherit; color: var(--text); background: rgba(0,0,0,.35); border: 1px solid var(--line); border-radius: 12px; padding: .75rem .9rem; width: 100%; }
   input:focus-visible, button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-
-  .stat-row { display: flex; gap: 2rem; margin: 0.5rem 0 1.2rem; flex-wrap: wrap; }
-  .stat-row span { display: block; color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; }
+  .stat-row { display: flex; gap: 2rem; margin: .5rem 0 1.2rem; flex-wrap: wrap; }
+  .stat-row span { display: block; color: var(--muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; }
   .stat-row b { font-size: 1.7rem; font-variant-numeric: tabular-nums; }
-
-  /* ---------------------------------------------------------- obrigado */
+  code { background: rgba(255,255,255,.08); padding: .1rem .35rem; border-radius: 6px; overflow-wrap: anywhere; }
 
   .thanks { text-align: center; padding: clamp(2rem, 6vw, 3.5rem) 1.5rem; }
-  .thanks .seal {
-    width: 96px; height: 96px; border-radius: 50%; margin: 0 auto 1.2rem;
-    display: grid; place-items: center; font-size: 2.6rem;
-    background: var(--favor-soft); color: var(--favor);
-  }
-  .thanks h2 { font-size: clamp(1.7rem, 4vw, 2.6rem); margin: 0 0 0.6rem; letter-spacing: -0.02em; }
+  .thanks .seal { width: 96px; height: 96px; border-radius: 50%; margin: 0 auto 1.2rem; display: grid; place-items: center; font-size: 2.6rem; background: var(--favor-soft); color: var(--favor); }
+  .thanks h2 { font-size: clamp(1.7rem, 4vw, 2.6rem); margin: 0 0 .6rem; letter-spacing: -.02em; }
   .thanks p { color: var(--muted); margin: 0 0 1.4rem; }
+  .mini { max-width: 560px; margin: 0 auto 1.4rem; text-align: left; }
+  .mini .split { height: 16px; margin-top: .5rem; }
+  .mini .row { display: flex; justify-content: space-between; font-weight: 650; font-variant-numeric: tabular-nums; }
 
-  /* ---------------------------------------------------------- diálogo */
-
-  dialog {
-    border: 1px solid var(--line);
-    border-radius: 24px;
-    background: var(--card-solid);
-    color: var(--text);
-    padding: 1.7rem;
-    width: min(460px, 92vw);
-    box-shadow: var(--shadow);
-  }
-
-  dialog::backdrop { background: rgba(3, 6, 15, 0.72); }
-  dialog:focus { outline: none; }
-  dialog h2 { margin: 0 0 0.5rem; font-size: 1.45rem; letter-spacing: -0.02em; }
+  dialog { border: 1px solid var(--line); border-radius: 24px; background: var(--card-solid); color: var(--text); padding: 1.7rem; width: min(460px, 92vw); box-shadow: var(--shadow); }
+  dialog::backdrop { background: rgba(3,6,15,.72); }
+  dialog h2 { margin: 0 0 .5rem; font-size: 1.45rem; letter-spacing: -.02em; }
   dialog p { margin: 0 0 1.3rem; color: var(--muted); }
   .pick { color: var(--text); font-weight: 700; }
-  .dialog-actions { display: flex; gap: 0.7rem; justify-content: flex-end; flex-wrap: wrap; }
+  .dialog-actions { display: flex; gap: .7rem; justify-content: flex-end; flex-wrap: wrap; }
 
-  .toast {
-    position: fixed; left: 50%; bottom: 1.5rem; transform: translate(-50%, 20px);
-    background: #1b2440; border: 1px solid var(--line); color: var(--text);
-    padding: 0.8rem 1.1rem; border-radius: 14px; box-shadow: var(--shadow);
-    opacity: 0; pointer-events: none; transition: 0.25s ease; z-index: 50;
-  }
+  .toast { position: fixed; left: 50%; bottom: 1.5rem; transform: translate(-50%, 20px); background: #1b2440; border: 1px solid var(--line); color: var(--text); padding: .8rem 1.1rem; border-radius: 14px; box-shadow: var(--shadow); opacity: 0; pointer-events: none; transition: .25s ease; z-index: 50; max-width: 92vw; }
   .toast.show { opacity: 1; transform: translate(-50%, 0); }
-
-  footer { margin-top: auto; padding-top: 1.6rem; color: var(--muted); font-size: 0.8rem; }
-
+  footer { margin-top: auto; padding-top: 1.6rem; color: var(--muted); font-size: .8rem; }
   [hidden] { display: none !important; }
 
   @media (max-width: 760px) {
     .vote-grid { grid-template-columns: 1fr; }
-    .vote-btn { min-height: 150px; flex-direction: row; justify-content: flex-start; text-align: left; padding: 1.4rem; }
+    .vote-btn { min-height: 130px; flex-direction: row; justify-content: flex-start; text-align: left; padding: 1.4rem; }
     .vote-btn .icon { flex: 0 0 auto; }
-    .duel { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+    .vote-btn .hint { display: none; }
+    .duel { grid-template-columns: 1fr 1fr; gap: .6rem; }
     .mid { display: none; }
     .pct { font-size: clamp(2.2rem, 13vw, 4rem); }
     .split { height: 18px; }
+    .qr-box { display: none; }
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    * { animation: none !important; transition: none !important; }
-  }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="topbar">
-    <span class="brand"><span class="dot"></span> Votação ao vivo</span>
+    <span class="brand"><span class="dot" id="status-dot"></span> <span id="status-text">Votação ao vivo</span></span>
     <nav class="nav">
       <button data-view="vote" class="active">Votar</button>
-      <button data-view="panel">Painel</button>
+      <button data-view="panel">Placar</button>
       <button data-view="admin">Admin</button>
       <button id="fullscreen" title="Tela cheia (F)">⛶</button>
     </nav>
   </header>
 
-  <!-- ------------------------------------------------ votação -->
+  <!-- votação -->
   <main id="view-vote">
-    <h1 id="question">Você é a favor ou contra Jorge Messias como ministro?</h1>
-    <p class="lead">Toque em uma das opções para registrar seu voto. Atalhos: <b>A</b> = a favor, <b>C</b> = contra.</p>
-
+    <h1>Você é a favor ou contra Jorge Messias como ministro?</h1>
+    <p class="lead">Toque em uma das opções para registrar seu voto.</p>
     <div class="vote-grid">
       <button class="vote-btn favor" data-option="favor" type="button">
         <span class="icon" aria-hidden="true">✓</span>
-        <span class="label" data-label="favor">A favor</span>
+        <span class="label">A favor</span>
         <span class="hint">tecla A</span>
       </button>
       <button class="vote-btn contra" data-option="contra" type="button">
         <span class="icon" aria-hidden="true">✕</span>
-        <span class="label" data-label="contra">Contra</span>
+        <span class="label">Contra</span>
         <span class="hint">tecla C</span>
       </button>
     </div>
-
-    <p class="small muted" id="vote-foot">Os votos ficam salvos neste computador.</p>
+    <p class="small muted" id="vote-foot"></p>
   </main>
 
-  <!-- ------------------------------------------------ obrigado -->
+  <!-- obrigado / já votou -->
   <main id="view-thanks" class="card thanks" hidden>
     <div class="seal" aria-hidden="true">✓</div>
-    <h2>Voto registrado!</h2>
+    <h2 id="thanks-title">Voto registrado!</h2>
     <p id="thanks-detail">Obrigado por participar.</p>
+    <div class="mini">
+      <div class="row"><span style="color:var(--favor)" id="mini-favor">A favor 0%</span><span style="color:var(--contra)" id="mini-contra">Contra 0%</span></div>
+      <div class="split"><div class="split-favor" id="mini-fill-favor"></div><div class="split-contra" id="mini-fill-contra"></div></div>
+      <p class="small muted" style="text-align:center;margin:.5rem 0 0" id="mini-total">0 votos no total</p>
+    </div>
     <div class="actions" style="justify-content:center">
-      <button class="btn primary" id="next" type="button">Próxima pessoa</button>
-      <button class="btn" data-view="panel" type="button">Ver resultado</button>
+      <button class="btn primary" id="next" type="button" hidden>Próxima pessoa</button>
+      <button class="btn" data-view="panel" type="button">Ver placar ao vivo</button>
     </div>
   </main>
 
-  <!-- ------------------------------------------------ painel -->
+  <!-- placar -->
   <main id="view-panel" class="screen-main" hidden>
-    <h1 class="screen-title" id="panel-title">Jorge Messias como ministro?</h1>
-
+    <div class="screen-head">
+      <h1 class="screen-title">Jorge Messias como ministro?</h1>
+      <div class="qr-box"><div id="qr"></div><small id="qr-text">Aponte a câmera e vote</small></div>
+    </div>
     <div class="duel">
       <div class="side favor">
         <div class="pct" id="pct-favor">0%</div>
-        <div class="side-label"><span class="chip" style="background:var(--favor)"></span> <span data-label="favor">A favor</span></div>
+        <div class="side-label"><span class="chip" style="background:var(--favor)"></span> A favor</div>
         <div class="side-count" id="count-favor">0 votos</div>
       </div>
       <div class="mid">
@@ -350,32 +193,23 @@
       </div>
       <div class="side contra">
         <div class="pct" id="pct-contra">0%</div>
-        <div class="side-label"><span class="chip" style="background:var(--contra)"></span> <span data-label="contra">Contra</span></div>
+        <div class="side-label"><span class="chip" style="background:var(--contra)"></span> Contra</div>
         <div class="side-count" id="count-contra">0 votos</div>
       </div>
     </div>
-
-    <div class="split">
-      <div class="split-favor" id="fill-favor"></div>
-      <div class="split-contra" id="fill-contra"></div>
-    </div>
-
+    <div class="split"><div class="split-favor" id="fill-favor"></div><div class="split-contra" id="fill-contra"></div></div>
     <p class="lead-line" id="lead">Aguardando o primeiro voto…</p>
-
-    <p class="small muted" style="text-align:center;margin:0.4rem 0 0">
-      Para o telão: <b>F</b> abre em tela cheia. <b>V</b> volta para a votação.
-    </p>
+    <p class="small muted" style="text-align:center;margin:.4rem 0 0">Atualiza sozinho a cada poucos segundos. <b>F</b> = tela cheia.</p>
   </main>
 
-  <!-- ------------------------------------------------ admin -->
+  <!-- admin -->
   <main id="view-admin" hidden>
     <h1>Administração</h1>
-    <p class="lead">Zerar a contagem e baixar os votos. Nesta versão de arquivo único, os votos ficam salvos no navegador deste computador.</p>
-
+    <p class="lead">Os votos de todos os aparelhos ficam num banco de dados central. O PIN é conferido no servidor.</p>
     <section class="card" style="margin-bottom:1rem">
       <div class="field">
-        <label for="pin">PIN (padrão 1234)</label>
-        <input id="pin" type="password" inputmode="numeric" autocomplete="off" placeholder="••••" />
+        <label for="pin">PIN do administrador</label>
+        <input id="pin" type="password" inputmode="numeric" autocomplete="off" placeholder="••••••" />
       </div>
       <div class="stat-row">
         <div><span>Total</span><b id="s-total">0</b></div>
@@ -387,16 +221,20 @@
         <button class="btn danger" id="reset" type="button">Zerar contagem</button>
       </div>
     </section>
-
-    <p class="small muted">
-      Os dados ficam na chave <code>jm_votos_v1</code> do armazenamento local do navegador. Limpar os dados do site apaga os votos.
-    </p>
+    <section class="card small">
+      <b>Links</b>
+      <p class="muted" style="margin:.5rem 0 0;line-height:1.9">
+        Celulares (1 voto por aparelho): <code id="link-celular"></code><br />
+        Notebook/tablet do estande (várias pessoas no mesmo aparelho): <code id="link-estande"></code><br />
+        Telão: <code id="link-telao"></code>
+      </p>
+    </section>
   </main>
 
-  <footer id="foot">Feito para a exposição · arquivo único, funciona sem internet</footer>
+  <footer>Votação ao vivo · os votos de todos os aparelhos são somados</footer>
 </div>
 
-<dialog id="confirm-dialog" tabindex="-1">
+<dialog id="confirm-dialog">
   <h2>Confirmar seu voto?</h2>
   <p>Você está votando <span class="pick" id="confirm-label">—</span>.</p>
   <div class="dialog-actions">
@@ -405,277 +243,273 @@
   </div>
 </dialog>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
 <script>
 (() => {
   'use strict';
 
-  // -------------------------------------------------------------- configuração
-  const CONFIG = {
-    title: 'Jorge Messias como ministro?',
-    question: 'Você é a favor ou contra Jorge Messias como ministro?',
-    options: { favor: 'A favor', contra: 'Contra' },
-    pin: '1234',
-    thanksSeconds: 6,
-    storageKey: 'jm_votos_v1',
-  };
+  const API_URL = 'https://aubxvojtwumithlghqwb.supabase.co';
+  const API_KEY = 'sb_publishable_gA2WHqUXv3VOby_2C-M2Wg_qi9CF4G2';
+  const LABEL = { favor: 'A favor', contra: 'Contra' };
+  const THANKS_SECONDS = 6;
+  const POLL_MS = 3000;
 
-  // -------------------------------------------------------------- estado
-  const carregar = () => {
-    try {
-      const dados = JSON.parse(localStorage.getItem(CONFIG.storageKey) || '{}');
-      return {
-        favor: Number(dados.favor) || 0,
-        contra: Number(dados.contra) || 0,
-        log: Array.isArray(dados.log) ? dados.log : [],
-      };
-    } catch {
-      return { favor: 0, contra: 0, log: [] };
-    }
-  };
+  const params = new URLSearchParams(location.search);
+  const ESTANDE = params.has('estande');
+  const BASE = location.origin + location.pathname;
 
-  let estado = carregar();
-
-  function salvar() {
-    try {
-      localStorage.setItem(CONFIG.storageKey, JSON.stringify(estado));
-    } catch (err) {
-      toast('Não consegui salvar: ' + err.message);
-    }
-  }
-
-  const total = () => estado.favor + estado.contra;
-  const pctDe = (n) => (total() ? (n / total()) * 100 : 0);
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => Array.from(document.querySelectorAll(s));
   const fmt = (n) => Number(n || 0).toLocaleString('pt-BR');
-  const pct = (n) => Number(n || 0).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
+  const pctTxt = (n) => Number(n || 0).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
+  const novoId = () => (crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2) + Date.now());
 
-  // -------------------------------------------------------------- utilidades
-  const $ = (sel) => document.querySelector(sel);
-  const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch {} },
+  };
 
   let toastTimer;
   function toast(msg) {
-    let el = document.querySelector('.toast');
-    if (!el) {
-      el = document.createElement('div');
-      el.className = 'toast';
-      document.body.appendChild(el);
-    }
-    el.textContent = msg;
-    el.classList.add('show');
+    let el = $('.toast');
+    if (!el) { el = document.createElement('div'); el.className = 'toast'; document.body.appendChild(el); }
+    el.textContent = msg; el.classList.add('show');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 3200);
   }
 
-  const views = {
-    vote: $('#view-vote'),
-    thanks: $('#view-thanks'),
-    panel: $('#view-panel'),
-    admin: $('#view-admin'),
-  };
-
-  function mostrar(nome) {
-    Object.entries(views).forEach(([chave, el]) => { el.hidden = chave !== nome; });
-    $$('.nav button[data-view]').forEach((b) => b.classList.toggle('active', b.dataset.view === nome));
-    if (nome !== 'thanks') pararContagem();
-    if (nome === 'panel') renderizarPainel();
-    if (nome === 'admin') renderizarAdmin();
+  // ------------------------------------------------------------ API
+  async function rpc(fn, args = {}) {
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), 10000);
+    try {
+      const r = await fetch(API_URL + '/rest/v1/rpc/' + fn, {
+        method: 'POST',
+        headers: { apikey: API_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify(args),
+        signal: ctrl.signal,
+      });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return await r.json();
+    } finally { clearTimeout(t); }
   }
 
-  // -------------------------------------------------------------- painel
-  function renderizarPainel() {
-    const t = total();
-    const f = pctDe(estado.favor);
-    const c = pctDe(estado.contra);
+  function online(ok) {
+    $('#status-dot').classList.toggle('off', !ok);
+    $('#status-text').textContent = ok ? 'Votação ao vivo' : 'Sem conexão — tentando de novo…';
+  }
 
-    $('#pct-favor').textContent = pct(f);
-    $('#pct-contra').textContent = pct(c);
-    $('#count-favor').textContent = fmt(estado.favor) + (estado.favor === 1 ? ' voto' : ' votos');
-    $('#count-contra').textContent = fmt(estado.contra) + (estado.contra === 1 ? ' voto' : ' votos');
+  // ------------------------------------------------------------ placar
+  let placar = { favor: 0, contra: 0, total: 0 };
+
+  function render(p) {
+    if (p) placar = { favor: +p.favor || 0, contra: +p.contra || 0, total: +p.total || 0 };
+    const t = placar.total;
+    const f = t ? placar.favor / t * 100 : 0;
+    const c = t ? placar.contra / t * 100 : 0;
+    $('#pct-favor').textContent = pctTxt(f);
+    $('#pct-contra').textContent = pctTxt(c);
+    $('#count-favor').textContent = fmt(placar.favor) + (placar.favor === 1 ? ' voto' : ' votos');
+    $('#count-contra').textContent = fmt(placar.contra) + (placar.contra === 1 ? ' voto' : ' votos');
     $('#total').textContent = fmt(t);
-    $('#fill-favor').style.width = f.toFixed(2) + '%';
-    $('#fill-contra').style.width = c.toFixed(2) + '%';
-
+    $('#fill-favor').style.width = $('#mini-fill-favor').style.width = f.toFixed(2) + '%';
+    $('#fill-contra').style.width = $('#mini-fill-contra').style.width = c.toFixed(2) + '%';
+    $('#mini-favor').textContent = 'A favor ' + pctTxt(f);
+    $('#mini-contra').textContent = 'Contra ' + pctTxt(c);
+    $('#mini-total').textContent = fmt(t) + (t === 1 ? ' voto' : ' votos') + ' no total';
+    $('#s-total').textContent = fmt(t);
+    $('#s-favor').textContent = fmt(placar.favor);
+    $('#s-contra').textContent = fmt(placar.contra);
     let lead;
     if (t === 0) lead = 'Aguardando o primeiro voto…';
-    else if (Math.abs(f - c) < 0.05) lead = 'Empate: ' + fmt(t) + ' votos registrados';
-    else {
-      const naFrente = f > c ? CONFIG.options.favor : CONFIG.options.contra;
-      const dif = Math.abs(f - c).toLocaleString('pt-BR', { maximumFractionDigits: 1 });
-      lead = naFrente + ' está na frente por ' + dif + ' pontos';
-    }
+    else if (placar.favor === placar.contra) lead = 'Empate — ' + fmt(t) + ' votos';
+    else lead = (f > c ? 'A favor' : 'Contra') + ' está na frente por ' + Math.abs(f - c).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + ' pontos';
     $('#lead').textContent = lead;
   }
 
-  // -------------------------------------------------------------- admin
-  function renderizarAdmin() {
-    $('#s-total').textContent = fmt(total());
-    $('#s-favor').textContent = fmt(estado.favor);
-    $('#s-contra').textContent = fmt(estado.contra);
+  async function atualizar() {
+    try { render(await rpc('placar')); online(true); }
+    catch { online(false); }
   }
 
-  // -------------------------------------------------------------- voto
-  let opcaoPendente = null;
+  let pollTimer = null;
+  function poll(on) {
+    clearInterval(pollTimer); pollTimer = null;
+    if (on) { atualizar(); pollTimer = setInterval(() => { if (!document.hidden) atualizar(); }, POLL_MS); }
+  }
 
+  // ------------------------------------------------------------ telas
+  const views = { vote: $('#view-vote'), thanks: $('#view-thanks'), panel: $('#view-panel'), admin: $('#view-admin') };
+  let atual = 'vote';
+  function mostrar(nome) {
+    atual = nome;
+    Object.entries(views).forEach(([k, el]) => { el.hidden = k !== nome; });
+    $$('.nav button[data-view]').forEach((b) => b.classList.toggle('active', b.dataset.view === nome));
+    if (nome !== 'thanks') pararContagem();
+    poll(nome === 'panel' || nome === 'admin' || nome === 'thanks');
+    if (nome === 'panel') desenharQr();
+    const hash = { panel: '#placar', admin: '#admin' }[nome] || '';
+    if (location.hash !== hash) history.replaceState(null, '', location.pathname + location.search + hash);
+  }
+
+  // ------------------------------------------------------------ aparelho
+  function idAparelho() {
+    if (ESTANDE) return novoId();
+    let id = store.get('jm_aparelho');
+    if (!id) { id = novoId(); store.set('jm_aparelho', id); }
+    return id;
+  }
+  const jaVotou = () => !ESTANDE && store.get('jm_votou');
+
+  // ------------------------------------------------------------ voto
+  let pendente = null;
   const dialog = $('#confirm-dialog');
 
-  function perguntar(option) {
-    opcaoPendente = option;
-    $('#confirm-label').textContent = CONFIG.options[option];
-    $('#confirm').style.background = option === 'contra'
-      ? 'linear-gradient(180deg,#f05252,#dc2626)'
-      : '';
-    if (typeof dialog.showModal === 'function') {
-      dialog.showModal();
-      $('#confirm').focus();
-    } else if (confirm('Confirmar voto: ' + CONFIG.options[option] + '?')) {
-      votar(option);
+  function perguntar(op) {
+    if (jaVotou()) return mostrarObrigado(store.get('jm_votou'), true);
+    pendente = op;
+    $('#confirm-label').textContent = LABEL[op];
+    $('#confirm').style.background = op === 'contra' ? 'linear-gradient(180deg,#f05252,#dc2626)' : '';
+    dialog.showModal();
+    $('#confirm').focus();
+  }
+
+  let enviando = false;
+  async function votar(op) {
+    if (enviando) return;
+    enviando = true;
+    $$('.vote-btn').forEach((b) => (b.disabled = true));
+    try {
+      const r = await rpc('votar', { p_opcao: op, p_aparelho: idAparelho() });
+      online(true);
+      render(r.placar);
+      if (!ESTANDE) store.set('jm_votou', op);
+      mostrarObrigado(op, !r.ok && r.erro === 'ja_votou');
+    } catch {
+      online(false);
+      toast('Não foi possível registrar o voto. Confira a internet e tente de novo.');
+    } finally {
+      enviando = false;
+      $$('.vote-btn').forEach((b) => (b.disabled = false));
     }
   }
 
-  function votar(option) {
-    estado[option] += 1;
-    estado.log.push({ t: new Date().toISOString(), o: option });
-    if (estado.log.length > 5000) estado.log = estado.log.slice(-5000);
-    salvar();
-    renderizarPainel();
-
-    $('#thanks-detail').textContent = 'Você votou: ' + CONFIG.options[option] + '.';
+  function mostrarObrigado(op, repetido) {
+    $('#thanks-title').textContent = repetido ? 'Você já votou' : 'Voto registrado!';
+    $('#thanks-detail').textContent = repetido
+      ? 'Este aparelho já registrou um voto. Acompanhe o placar:'
+      : 'Você votou: ' + LABEL[op] + '. Obrigado por participar!';
     mostrar('thanks');
-    iniciarContagem();
+    if (ESTANDE) iniciarContagem();
   }
 
-  // -------------------------------------------------------------- contagem regressiva
   let timer = null;
-
-  function pararContagem() {
-    if (timer) clearInterval(timer);
-    timer = null;
-  }
-
+  function pararContagem() { clearInterval(timer); timer = null; }
   function iniciarContagem() {
     pararContagem();
-    let restante = CONFIG.thanksSeconds;
-    const rotulo = $('#next');
-    rotulo.textContent = 'Próxima pessoa em ' + restante + 's';
+    let n = THANKS_SECONDS;
+    const b = $('#next');
+    b.textContent = 'Próxima pessoa em ' + n + 's';
     timer = setInterval(() => {
-      restante -= 1;
-      if (restante <= 0) {
-        pararContagem();
-        rotulo.textContent = 'Próxima pessoa';
-        mostrar('vote');
-        return;
-      }
-      rotulo.textContent = 'Próxima pessoa em ' + restante + 's';
+      n -= 1;
+      if (n <= 0) { pararContagem(); b.textContent = 'Próxima pessoa'; mostrar('vote'); return; }
+      b.textContent = 'Próxima pessoa em ' + n + 's';
     }, 1000);
   }
 
-  // -------------------------------------------------------------- CSV
-  function baixarCsv() {
-    const linhas = ['data,hora,voto'];
-    for (const item of estado.log) {
-      const d = new Date(item.t);
-      const iso = d.toISOString();
-      linhas.push(iso.slice(0, 10) + ',' + iso.slice(11, 19) + ',' + (item.o === 'favor' ? 'a_favor' : 'contra'));
-    }
-    const blob = new Blob([linhas.join('\r\n')], { type: 'text/csv;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'votos.csv';
-    a.click();
-    setTimeout(() => URL.revokeObjectURL(url), 2000);
+  // ------------------------------------------------------------ QR
+  let qrFeito = false;
+  function desenharQr() {
+    if (qrFeito || typeof QRCode === 'undefined') return;
+    try {
+      new QRCode($('#qr'), { text: BASE, width: 300, height: 300, correctLevel: QRCode.CorrectLevel.M });
+      qrFeito = true;
+    } catch {}
   }
 
-  // -------------------------------------------------------------- eventos
-  $$('.vote-btn').forEach((btn) => btn.addEventListener('click', () => perguntar(btn.dataset.option)));
-
-  $('#confirm').addEventListener('click', () => {
-    if (opcaoPendente) votar(opcaoPendente);
-    opcaoPendente = null;
-    if (dialog.open) dialog.close();
-  });
-
-  $('#cancel').addEventListener('click', () => {
-    opcaoPendente = null;
-    if (dialog.open) dialog.close();
-  });
-
-  $('#next').addEventListener('click', () => {
-    pararContagem();
-    $('#next').textContent = 'Próxima pessoa';
-    mostrar('vote');
-  });
-
-  $$('.nav button[data-view], [data-view]').forEach((btn) => {
-    if (btn.dataset.view === 'vote' || btn.dataset.view === 'panel' || btn.dataset.view === 'admin') {
-      btn.addEventListener('click', () => mostrar(btn.dataset.view));
-    }
-  });
-
-  $('#fullscreen').addEventListener('click', alternarTelaCheia);
-
-  function alternarTelaCheia() {
-    if (!document.fullscreenElement) {
-      (document.documentElement.requestFullscreen?.() || Promise.reject()).catch(() =>
-        toast('Tela cheia indisponível neste navegador — use F11.')
-      );
-    } else {
-      document.exitFullscreen?.();
-    }
-  }
-
-  $('#reset').addEventListener('click', () => {
-    if ($('#pin').value.trim() !== CONFIG.pin) return toast('PIN incorreto.');
-    if (!confirm('Zerar todos os votos? Isso não pode ser desfeito.')) return;
-    estado = { favor: 0, contra: 0, log: [] };
-    salvar();
-    renderizarAdmin();
-    renderizarPainel();
-    toast('Contagem zerada.');
-  });
-
-  $('#export').addEventListener('click', () => {
-    if ($('#pin').value.trim() !== CONFIG.pin) return toast('PIN incorreto.');
-    baixarCsv();
-  });
-
-  document.addEventListener('keydown', (event) => {
-    if (dialog.open) {
-      if (event.key === 'Escape') {
-        opcaoPendente = null;
-        dialog.close();
-      }
-      // Enter é tratado pelo próprio botão focado (Confirmar ou Cancelar)
+  // ------------------------------------------------------------ admin
+  const pin = () => $('#pin').value.trim();
+  let armado = null;
+  $('#reset').addEventListener('click', async () => {
+    const b = $('#reset');
+    if (!pin()) return toast('Digite o PIN.');
+    if (!armado) {
+      b.textContent = 'Clique de novo para zerar tudo';
+      b.classList.add('armed');
+      armado = setTimeout(() => { armado = null; b.textContent = 'Zerar contagem'; b.classList.remove('armed'); }, 4000);
       return;
     }
-    if (event.target.matches('input, textarea')) return;
-
-    const tecla = event.key.toLowerCase();
-    if (tecla === 'a') perguntar('favor');
-    else if (tecla === 'c') perguntar('contra');
-    else if (tecla === 'v') mostrar('vote');
-    else if (tecla === 'p') mostrar('panel');
-    else if (tecla === 'f') alternarTelaCheia();
+    clearTimeout(armado); armado = null;
+    b.textContent = 'Zerando…'; b.classList.remove('armed'); b.disabled = true;
+    try {
+      const r = await rpc('zerar', { p_pin: pin() });
+      if (!r.ok) toast('PIN incorreto.');
+      else { render(r.placar); toast('Contagem zerada para todos.'); }
+    } catch { toast('Falha de conexão. Tente de novo.'); }
+    finally { b.textContent = 'Zerar contagem'; b.disabled = false; }
   });
 
-  // sincroniza entre abas/janelas abertas no mesmo navegador
-  window.addEventListener('storage', (event) => {
-    if (event.key !== CONFIG.storageKey) return;
-    estado = carregar();
-    renderizarPainel();
-    renderizarAdmin();
+  $('#export').addEventListener('click', async () => {
+    if (!pin()) return toast('Digite o PIN.');
+    try {
+      const r = await rpc('exportar', { p_pin: pin() });
+      if (!r.ok) return toast('PIN incorreto.');
+      const linhas = ['data,hora,voto'];
+      for (const v of r.votos) {
+        const d = new Date(v.t);
+        const local = new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString();
+        linhas.push(local.slice(0, 10) + ',' + local.slice(11, 19) + ',' + (v.o === 'favor' ? 'a_favor' : 'contra'));
+      }
+      const blob = new Blob(['﻿' + linhas.join('\r\n')], { type: 'text/csv;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'votos.csv';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+      toast(r.votos.length + ' votos exportados.');
+    } catch { toast('Falha de conexão. Tente de novo.'); }
   });
 
-  // -------------------------------------------------------------- início
-  document.title = 'Votação — ' + CONFIG.title;
-  $('#question').textContent = CONFIG.question;
-  $('#panel-title').textContent = CONFIG.title;
-  $$('[data-label="favor"]').forEach((el) => { el.textContent = CONFIG.options.favor; });
-  $$('[data-label="contra"]').forEach((el) => { el.textContent = CONFIG.options.contra; });
+  // ------------------------------------------------------------ eventos
+  $$('.vote-btn').forEach((b) => b.addEventListener('click', () => perguntar(b.dataset.option)));
+  $('#confirm').addEventListener('click', () => { const op = pendente; pendente = null; dialog.close(); if (op) votar(op); });
+  $('#cancel').addEventListener('click', () => { pendente = null; dialog.close(); });
+  $('#next').addEventListener('click', () => { pararContagem(); $('#next').textContent = 'Próxima pessoa'; mostrar('vote'); });
+  $$('[data-view]').forEach((b) => b.addEventListener('click', () => mostrar(b.dataset.view)));
 
-  renderizarPainel();
-  renderizarAdmin();
-  mostrar('vote');
+  function telaCheia() {
+    if (!document.fullscreenElement) {
+      const p = document.documentElement.requestFullscreen && document.documentElement.requestFullscreen();
+      if (p && p.catch) p.catch(() => toast('Use F11 para tela cheia.'));
+    } else if (document.exitFullscreen) document.exitFullscreen();
+  }
+  $('#fullscreen').addEventListener('click', telaCheia);
+
+  document.addEventListener('keydown', (e) => {
+    if (dialog.open || e.target.matches('input, textarea')) return;
+    const k = e.key.toLowerCase();
+    if (k === 'a' && atual === 'vote') perguntar('favor');
+    else if (k === 'c' && atual === 'vote') perguntar('contra');
+    else if (k === 'v') mostrar('vote');
+    else if (k === 'p') mostrar('panel');
+    else if (k === 'f') telaCheia();
+  });
+
+  // ------------------------------------------------------------ início
+  $('#next').hidden = !ESTANDE;
+  $('#vote-foot').textContent = ESTANDE
+    ? 'Modo estande: várias pessoas podem votar neste aparelho, uma de cada vez.'
+    : 'Um voto por aparelho. O placar soma os votos de todo mundo.';
+  $('#link-celular').textContent = BASE;
+  $('#link-estande').textContent = BASE + '?estande';
+  $('#link-telao').textContent = BASE + '#placar';
+
+  window.addEventListener('load', () => { if (atual === 'panel') desenharQr(); });
+
+  if (location.hash === '#placar') mostrar('panel');
+  else if (location.hash === '#admin') mostrar('admin');
+  else if (jaVotou()) mostrarObrigado(store.get('jm_votou'), true);
+  else mostrar('vote');
 })();
 </script>
 </body>
